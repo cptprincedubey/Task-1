@@ -6,6 +6,9 @@ const {
   logoutController,
   forgotPasswordController,
   updatePasswordController,
+  verifyEmailController,
+  resendVerificationEmailController,
+  profileController,
   meController,
 } = require("../controllers/auth.controllers");
 const authMiddleware = require("../middlewares/auth.middlewares");
@@ -37,8 +40,11 @@ router.get("/reset-password/:token", async (req, res) => {
 
 router.post("/update-password/:id", updatePasswordController);
 router.post("/register", registerController);
+router.get("/verify-email/:token", verifyEmailController);
+router.post("/resend-verification", resendVerificationEmailController);
 router.post("/login", loginController);
 router.post("/logout", logoutController);
+router.get("/profile", authMiddleware, profileController);
 router.get("/me", authMiddleware, meController);
 
 module.exports = router;

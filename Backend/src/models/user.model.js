@@ -4,7 +4,7 @@ const jwt = require("jsonwebtoken");
 
 const userSchema = new mongoose.Schema(
   {
-    fullname: {
+    name: {
       type: String,
       required: true,
     },
@@ -13,33 +13,23 @@ const userSchema = new mongoose.Schema(
       required: true,
       unique: true,
     },
-    mobile: {
-      type: String,
-      required: true,
-      unique: true,
-      minlength: 10,
-      maxlength: 10,
-    },
     password: {
       type: String,
       required: true,
       minlength: 6,
     },
-    role: {
-      type: String,
-      enum: ["user", "seller"],
-      default: "user",
-    },
-    isAdmin: {
+    isVerified: {
       type: Boolean,
       default: false,
     },
-    products: [
-      {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "product",
-      },
-    ],
+    emailVerificationToken: {
+      type: String,
+      default: null,
+    },
+    emailVerificationTokenExpiry: {
+      type: Date,
+      default: null,
+    },
   },
   { timestamps: true }
 );
